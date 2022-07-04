@@ -29,3 +29,15 @@ Route::get('/select', function () {
 
     dd($user);
 });
+
+Route::get('/where', function () {
+    $name = request('name');
+    $users = User::where('name', 'LIKE', "%{$name}%")
+                    ->orWhere(function ($query) {
+                        // $query->where('name', 'LIKE', '%De%');
+                        $query->where('email' ,'gerda19@example.com');
+                    })
+                    ->get();
+
+    dd($users);
+});
