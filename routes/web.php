@@ -41,3 +41,9 @@ Route::get('/where', function () {
 
     dd($users);
 });
+
+Route::get('/orderby', function () {
+    $users = User::orderby('name', 'DESC')->get();
+
+    return $users;
+});
