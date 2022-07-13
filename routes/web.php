@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,27 @@ Route::get('/orderby', function () {
     $users = User::orderby('name', 'DESC')->get();
 
     return $users;
+});
+
+Route::get('/insert', function () {
+    $post = Post::create([
+            'user_id' => 11,
+            'title' => 'POst teste 2',
+            'body' => 'Body do post 3',
+            'date' => date('Y-m-d')
+    ]);
+
+    return $post;
+});
+
+Route::get('/delete', function () {
+    $user = User::find(1);
+
+    if ($user) {
+        dd($user->delete());
+    }
+    // other option to delete more than one post
+    // Post::destroy(Post::where('id', '<=2')->get());
+
+    return 'User not found';
 });
