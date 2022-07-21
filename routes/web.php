@@ -92,3 +92,15 @@ Route::get('/softDelete', function () {
 
     return Post::all();
 });
+
+Route::get('/postTitle', function () {
+    $post = Post::findOrFail(request('post'));
+
+    return $post->title;
+});
+
+Route::get('/postTitleAndBody', function () {
+    $post = Post::findOrFail(request('post'));
+
+    return $post->title_and_body;
+});
