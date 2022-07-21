@@ -24,7 +24,8 @@ Route::get('/select', function () {
     // $users = User::where('id', 10)->first(); traz o objeto de id 10
     // $user = User::first(); traz o primeiro usuário do banco
     // $user = User::find(32); procura o user com id 32
-    // $user = User::findORFail(request('id'));
+    // $user = User::findOrFail(request('id'));
+    // $posts = Post::all(); Retorn todos os posts do banco
 
     $user = User::where('name', request('name'))->firstOrFail();
 
@@ -51,21 +52,34 @@ Route::get('/orderby', function () {
 
 Route::get('/insert', function () {
     $post = Post::create([
-            'user_id' => 11,
-            'title' => 'POst teste 2',
-            'body' => 'Body do post 3',
+            'user_id' => 10,
+            'title' => 'POst teste 10',
+            'body' => 'Body do post 10',
             'date' => date('Y-m-d')
     ]);
 
     return $post;
 });
 
-Route::get('/delete', function () {
-    $user = User::find(1);
+Route::get('/update', function () {
+    // update utilizando o method save
+    // $post = Post::findOrFail(1);
+    // $post->title = 'Oloquinho meu';
+    // $post->save();
 
-    if ($user) {
-        dd($user->delete());
-    }
+    $post = Post::findOrFail(3);
+    $post->update([
+        'title' => 'Oloquinho eleven',
+        'body' => 'Inazuma eleven é top'
+    ]);
+
+    return $post->all();
+});
+
+Route::get('/delete', function () {
+    $user = User::findOrFail(12);
+
+    dd($user->delete());
     // other option to delete more than one post
     // Post::destroy(Post::where('id', '<=2')->get());
 
