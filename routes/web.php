@@ -81,7 +81,14 @@ Route::get('/delete', function () {
 
     dd($user->delete());
     // other option to delete more than one post
-    // Post::destroy(Post::where('id', '<=2')->get());
+    // Post::destroy(Post::where('id', '2')->get());
 
     return 'User not found';
+});
+
+Route::get('/softDelete', function () {
+    //other option to delete more than one post
+    Post::destroy(Post::where('id', '<=', '2')->get());
+
+    return Post::all();
 });
