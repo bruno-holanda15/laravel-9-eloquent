@@ -80,11 +80,9 @@ Route::get('/update', function () {
 Route::get('/delete', function () {
     $user = User::findOrFail(12);
 
-    dd($user->delete());
+    return $user->delete();
     // other option to delete more than one post
     // Post::destroy(Post::where('id', '2')->get());
-
-    return 'User not found';
 });
 
 Route::get('/softDelete', function () {
