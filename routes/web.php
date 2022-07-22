@@ -3,6 +3,7 @@
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,4 +104,16 @@ Route::get('/postTitleAndBody', function () {
     $post = Post::findOrFail(request('post'));
 
     return $post->title_and_body;
+});
+
+Route::get('/mutator', function () {
+    $user = User::first();
+    $post = Post::create([
+        'user_id' => $user->id,
+        'title' => 'Post ' . Str::random(5),
+        'body' => 'Body ' . Str::random(15),
+        'date' => now()
+    ]);
+
+    return $post;
 });
