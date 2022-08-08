@@ -53,8 +53,8 @@ Route::get('/orderby', function () {
 
 Route::get('/insert', function () {
     $post = Post::create([
-            'user_id' => 10,
-            'title' => 'POst teste 10',
+            'user_id' => 11,
+            'title' => 'POst teste 10' . random_int(12, 45),
             'body' => 'Body do post 10',
             'date' => date('Y-m-d')
     ]);
@@ -114,4 +114,8 @@ Route::get('/mutator', function () {
     ]);
 
     return $post;
+});
+
+Route::get('/local-scope', function () {
+    return (new Post())->today();
 });

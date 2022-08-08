@@ -39,4 +39,9 @@ class Post extends Model
             set: fn($value) => Carbon::make($value)->format('Y-m-d')
         );
     }
+
+    public function scopeToday()
+    {
+        return $this->where('date', Carbon::now()->format('Y-m-d'))->get();
+    }
 }
