@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,13 @@ class Post extends Model
     protected $casts = [
         'date' => 'datetime:d/m/Y'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('year', function (Builder $query) {
+            $query->whereYear('date', Carbon::now()->year);
+        });
+    }
 
     protected function title(): Attribute
     {

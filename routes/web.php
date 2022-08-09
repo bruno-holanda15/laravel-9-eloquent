@@ -113,9 +113,18 @@ Route::get('/mutator', function () {
         'date' => now()
     ]);
 
-    return $post;
+    return $post->date;
 });
 
 Route::get('/local-scope', function () {
     return (new Post())->today();
 });
+
+Route::get('/global-scope-year', function () {
+    return Post::get();
+});
+
+Route::get('/without-global-scope-year', function () {
+    return Post::withoutGlobalScope('year')->get();
+});
+
