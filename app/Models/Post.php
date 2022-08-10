@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\YearScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -22,9 +23,10 @@ class Post extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope('year', function (Builder $query) {
-            $query->whereYear('date', Carbon::now()->year);
-        });
+        // static::addGlobalScope('year', function (Builder $query) {
+        //     $query->whereYear('date', Carbon::now()->year);
+        // });
+        static::addGlobalScope(new YearScope);
     }
 
     protected function title(): Attribute

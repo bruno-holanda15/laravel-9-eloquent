@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\Scopes\YearScope;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -125,6 +126,6 @@ Route::get('/global-scope-year', function () {
 });
 
 Route::get('/without-global-scope-year', function () {
-    return Post::withoutGlobalScope('year')->get();
+    return Post::withoutGlobalScope(new YearScope)->get();
 });
 
