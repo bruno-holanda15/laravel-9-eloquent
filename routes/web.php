@@ -34,6 +34,14 @@ Route::get('/select', function () {
     dd($user);
 });
 
+Route::get('/users', function () {
+    return User::paginate(10);
+});
+
+Route::get('/posts', function () {
+    return Post::all();
+});
+
 Route::get('/where', function () {
     $name = request('name');
     $users = User::where('name', 'LIKE', "%{$name}%")
@@ -129,3 +137,11 @@ Route::get('/without-global-scope-year', function () {
     return Post::withoutGlobalScope(new YearScope)->get();
 });
 
+Route::get('/observer', function () {
+    return Post::create([
+        'user_id' => request()->input('user') ?? '9',
+        'title' => 'POst teste observer' . random_int(12, 45),
+        'body' => 'Body do post observer' . random_int(1, 21),
+        'date' => date('Y-m-d')
+    ]);
+});
